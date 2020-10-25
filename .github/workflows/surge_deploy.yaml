@@ -1,1 +1,19 @@
+---
+name: Deploy Website
+on: [push]
 
+jobs:
+  build:
+      run-on: ubuntu-latest
+      name: Deploying to surge
+      steps: 
+        - uses: actions/checkout@v2
+        - name: Install Node.js
+          uses: actions/setup-node@v2-beta
+          with: 
+            node-version: 12
+        - name: Install Surge
+          run: npm install -g surge
+        - name: Run Surge
+          run: surge ./ bootcamp_setup_zaheer.surge.sh --token ${{SURGE_TOKEN}}
+...
